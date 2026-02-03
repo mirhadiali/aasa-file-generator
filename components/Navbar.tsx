@@ -11,7 +11,7 @@ export default function Navbar() {
                 <div className={styles.links}>
                     <Link href="/lookup" className={styles.link}>Lookup</Link>
                     <Link href="/generator" className={styles.link}>Generator</Link>
-                    <Link href="https://buymeacoffee.com/mirhadiali" target="_blank" className={styles.coffeeBtn}>
+                    <Link href="https://buymeacoffee.com/iAhtisham" target="_blank" className={styles.coffeeBtn}>
                         ☕ Buy Me a Coffee
                     </Link>
                 </div>
