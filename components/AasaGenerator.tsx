@@ -13,6 +13,7 @@ interface AppConfig {
   id: string;
   bundleId: string;
   teamId: string;
+  appClipBundleId?: string;
   paths: string[];
   components: PathComponent[];
 }
@@ -45,7 +46,19 @@ export default function AasaGenerator() {
         }))
       };
 
-      setJsonOutput(JSON.stringify({ applinks }, null, 2));
+      const appClipIds = apps
+        .filter(app => app.appClipBundleId)
+        .map(app => `${app.teamId}.${app.appClipBundleId}`);
+
+      const output: any = { applinks };
+
+      if (appClipIds.length > 0) {
+        output.appclips = {
+          apps: appClipIds
+        };
+      }
+
+      setJsonOutput(JSON.stringify(output, null, 2));
     };
 
     generateJson();
@@ -161,6 +174,16 @@ export default function AasaGenerator() {
                     placeholder="com.example.app"
                   />
                 </div>
+              </div>
+
+              <div className={styles.fieldGroup}>
+                <label className={styles.fieldLabel}>App Clip Bundle ID (Optional)</label>
+                <input
+                  type="text"
+                  value={app.appClipBundleId || ''}
+                  onChange={(e) => updateApp(app.id, 'appClipBundleId', e.target.value)}
+                  placeholder="com.example.app.Clip"
+                />
               </div>
 
               <div className={styles.fieldGroup}>
